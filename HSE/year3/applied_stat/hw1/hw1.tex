@@ -1,0 +1,407 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по прикладной статистике №1}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\section*{Задача №1}
+
+\textbf{(а)}
+\[
+    D_{KL}(f(y|\theta), f(y|\phi)) = 1/2I(\theta)(\phi  - theta)^2 + 
+    O((\phi - \theta)^3)
+\]
+\[
+  H(f) = \mathbb{E}(\ln f)  
+\]
+
+\[
+D_{KL} = \int f_{\theta}(\ln f_{\phi} - \ln f_{\theta})  = \mathbb{E} \ln f_{\theta}
+\]
+
+Сила Тейлора
+\[
+\ln f_{\phi}  =_{\phi \rightarrow \theta} \ln f_{\theta} + (\ln f_{\theta})'(\phi - \theta) + 1/2(\ln f_{\theta})''(\phi - \theta)^2 + O((\phi - \theta)^3) \Rightarrow
+\]
+\[
+     \mathbb E \ln f_{\phi} -  \mathbb E  \ln f_{\theta} =  \mathbb E  [(\ln f_{\theta})'(\phi - \theta)] + 1/2 \mathbb E [(\ln f_{\theta})''(\phi - \theta)^2] + O((\phi - \theta)^3)
+\]
+мы знаем, что $ \mathbb E [(\ln f_{\theta})''] = I(\theta) \;\;и  \\ 
+\mathbb E  [(\ln f_{\theta})'(\phi - \theta)] = 0 \Rightarrow
+$ 
+\[
+    D_{KL}(f(y|\theta), f(y|\phi)) = 1/2I(\theta)(\phi  - theta)^2 + 
+    O((\phi - \theta)^3)  
+\]
+
+\textbf{(b)}
+Из семинара нам известно что есть обратная зависимость у дисперсии МЛ оценок. 
+Также из сема мы знаем, что
+что оси приблежаются к истинному параметру когда $I(\hat \theta)$ растет, тогда 
+$VAR(\hat \theta)$ Падает.
+
+\newpage
+
+\section*{Задача №2}
+\textbf{(a)} Найдите $\hat{q}_{ML}$. \\\\
+Для начала найдем функцию правдоподобия
+\[
+L(q|x) = \prod^n_{i=1}\frac{2x_i}{q}e^{\frac{-x_i^2}{q}} =
+\frac{2^n\sum{x_i}}{q^n} * e^{\frac{\sum{-x^2_i}}{q}}
+\]
+Теперь найдем логарифмическую ф-ию правдоподобия
+\[
+l = n \ln(2) - n \ln(q) + \ln(\sum{x_i}) + \frac{\sum{-x^2_i}}{q}
+\]
+Далее найдем производную от $l$, то есть score ф-ию
+\[
+s = -\frac{n}{q} + \frac{\sum{x_i^2}}{q^2}    
+\]
+
+Теперь приравняем к нули и найдем оценку
+
+\[
+    -\frac{n}{\hat q} + \frac{\sum{x^2_i}}{\hat q^2} = 0
+\]
+\[
+\hat q = \frac{\sum{x^2_i}}{n}
+\]
+\textbf{(б)}
+Из семинара мы знаем, что если $g$ - гладкая, то
+\[
+    \widehat{g(\theta_{ML})} = g(\hat{\theta}_{ML})
+\]
+\[
+\Rightarrow \widehat{(q^2)}_{ML} = \left({\frac{\sum{x^2_i}}{n}}\right)^2
+\]
+
+\textbf{(в)} Построить 95\%-ый доверительный интервал для q.
+Из семинара мы знаем, что можем посчитать по формуле.
+
+\[
+    \hat q_{ML} - 1.96 * SE(\hat q_{ML})\leq q \leq  \hat q_{ML} + 1.96 * SE(\hat q_{ML})
+\]
+Также мы знаем, что 
+\[
+    SE(\hat q_{ML}) = \sqrt{(\mathbb D(\hat q_{ML}))}
+    \]
+
+\[\hat I (\hat q) = \frac{1}{\widehat {Var}(\hat q)} \]
+\[
+    s' = \frac{n}{q^2} - \frac{2\sum x^2_i}{q^3}
+\]
+
+\[
+    \hat I = -\mathbb{E}_{\hat q} \left( \frac{n}{\hat q^2} - \frac{2\sum x^2_i}{\hat q^3}\right) = 
+    -\frac{n}{\hat q^2} + \frac{2}{\hat q ^ 3}\mathbb{E}_{\hat q}(\sum{x^2_i}) 
+\]
+\[
+    \mathbb{E}_{q}(\sum{x^2_i}) = \sum \int_0^{+\infty} x_i^2 \cdot \frac{2x_i}{q} \cdot e^{\frac{-x_i^2}{q}}dx_i = 
+    n \cdot \int_0^{+\infty} x_1^2 \cdot \frac{2x_1}{q} \cdot e^{\frac{-x_1^2}{q}}dx_1 = 
+\]
+\[
+    =\left[ y = \frac{x_1^2}{q}\right] = 
+    nq\int_0^{+\infty}ye^{-y}dy = 
+    nq \left(0 - \int_0^{-\infty} e^{-y}dy \right) = nq
+    \]
+
+\[
+\Rightarrow \hat I = -\frac{n}{\hat q^2} + \frac{2n}{\hat q^2} = \frac{n}{\hat q^2} 
+\Rightarrow \mathbb{D}(\hat q) = \frac{\hat q ^ 2}{n}
+\]
+\textbf{Ответ:}
+\[
+\hat q_{ML} - 1.96 * \frac{\hat q_{ML}}{\sqrt n})\leq q \leq  \hat q_{ML} + 1.96 * \frac{\hat q_{ML}}{\sqrt n}
+\]
+
+\newpage
+\section*{Задача №3}
+\textbf{(a)}
+\[
+    L = \binom{150}{75 \;30\; 45} p_1^{75}p_2^{30}(1 - p_1 - p_2)^{45} \]
+\[    
+    l = \ln\binom{75\; 30\; 45}{150} + 75 \ln p_1 + 30\ln p_2 + 45\ln(1 - p_1 - p_2)
+\]
+
+\[
+l'_{p_1} = \frac{75}{p_1} - \frac{45}{1- p_1 - p_2}
+\]
+\[
+    l'_{p_2} = \frac{30}{p_2} - \frac{45}{1- p_1 - p_2}
+    \]
+\[\left\{
+    \begin{gathered}
+    75(1 - \hat p_1 - \hat p_2) = 45\hat p_1 \\
+    30(1 - \hat p_1 - \hat p_2) = 45\hat p_2
+\end{gathered} \right.
+\]
+
+\[\left\{
+    \begin{gathered}
+    5(1 - \hat p_1 - \hat p_2) = 3\hat p_1 \\
+    2(1 - \hat p_1 - \hat p_2) = 3\hat p_2
+\end{gathered} \right.
+\]
+
+\[\left\{
+    \begin{gathered}
+     8\hat p_1 + 5 \hat p_2 = 5 \\
+    2\hat p_1 + 5\hat p_2 = 2
+\end{gathered} \right.
+\]
+
+\[\left\{
+    \begin{gathered}
+     \hat p_1 = 0.5 \\
+    \hat p_2 = 0.2
+\end{gathered} \right.
+\]
+
+\textbf{Ответ наша ml оценка равана:}
+
+\[
+    \hat p_{ML} = \binom{0.5}{0.2}
+\]
+
+\textbf{(b)}
+Проверим гипотезу $H_0: p_1 = 0.7$ против $H_A: p_1 \neq 0.7$для начала с помощью LR теста
+Вспомним, что
+\[
+    LR = 2(l_{ur} - l_r)
+\]
+$l_{ur}$ - значение логарифмической функции правдоподобия без ограничений (unrestricted), в нашем
+случае мы нашли $\hat p_{ML}$ просто подставим в функцию и посчитаем.
+\[ 
+    l_{ur} = 
+    \ln\binom{150}{75\; 30\; 45} + 75 \ln 0.5 + 30\ln 0.2 + 45\ln(1 - 0.5 - 0.2) 
+\]
+\[
+    \approx 149.35 - 51.99 - 48.28 - 54.18 \approx -5.1    
+\]
+
+\[
+    \frac{30}{\bar p_2} - \frac{45}{1- 0.7 - \bar p_2} = 0
+\]
+\[
+    \bar p_2 = \frac{9}{75} = 0.12
+\]
+
+\[
+    l_{r} = \ln\binom{150}{75\; 30\; 45} + 75 \ln 0.7 + 30\ln 0.12 + 45\ln(1 - 0.7 - 0.12)
+\]
+\[
+    \approx 149.35 - 26.39 - 63.6 - 77.17 \approx -17.81
+\]
+\[
+LR = 2(-5.1 + 17.81) = 25.42
+\]
+Одно ограничение $\Rightarrow \chi^2_1 \Rightarrow$ 
+сравниваем с 3.84 $\Rightarrow$ гипотеза отвергается \\\\
+Теперь посчитаем LM тест
+
+\[
+LM = \hat S^T_R \cdot \widehat{Var}(\hat S_R)^{-1} \cdot \hat S_R   
+\]
+Для этого для начала посчитаем матрицу Гессе
+\[
+    l''_{p_1p_1} = -\frac{75}{p_1^2} - \frac{45}{(1- p_1 - p_2)^2}
+\]
+
+\[
+    l''_{p_1p_2} = - \frac{45}{(1- p_1 - p_2)^2}
+\]
+
+\[
+    l''_{p_2p_2} = -\frac{30}{p_2^2} - \frac{45}{(1- p_1 - p_2)^2}
+\]
+Так как все константы, то мат ожидания будет тем же посчитаем сразу инфморацию фишера
+
+\[
+I_r \approx
+ \begin{pmatrix}
+    1542 &  1388 \\
+    1388 & 1721
+\end{pmatrix}	
+\]
+
+\[S_r =
+ \begin{pmatrix}
+    \frac{75}{0.7} - \frac{45}{1- 0.7 - 0.12} \\
+    \frac{30}{0.12} - \frac{45}{1- 0.7 - 0.12}
+\end{pmatrix} \approx 
+\begin{pmatrix}
+    -143 \\
+    0
+\end{pmatrix} 
+\]
+
+\[LM \approx
+\begin{pmatrix}
+    -143
+    & 0
+\end{pmatrix} \cdot 
+\begin{pmatrix}
+    1541 &  1388 \\
+    1388 & 1721
+\end{pmatrix}^{-1} \cdot
+\begin{pmatrix}
+    -143 \\
+    0
+\end{pmatrix} \approx 48.39\]
+$H_0$ отвергается, так как LM > 3.84
+\\\\\textbf{(c)}
+\[
+W = (\hat \gamma_{ur} - \gamma_0)^T \cdot \widehat{Var}(\hat \gamma_{ur})^{-1} 
+\cdot (\hat \gamma_{ur} - \gamma_0) = 
+\]
+\[
+H_0 : \begin{pmatrix}
+    p_1 \\ p_2    
+\end{pmatrix} = \begin{pmatrix}
+    0.4 \\ 0.6
+\end{pmatrix}
+\]
+
+\[
+H_0 : \begin{pmatrix}
+    p_1 \\ p_2    
+\end{pmatrix} \neq \begin{pmatrix}
+    0.4 \\ 0.6
+\end{pmatrix}
+\]
+
+
+\[
+=\begin{pmatrix}
+    0.1
+    & -0.4
+\end{pmatrix} \cdot 
+\begin{pmatrix}
+    800 &  500 \\
+    500 & 1250
+\end{pmatrix} \cdot
+\begin{pmatrix}
+    0.1 \\
+    -0.4
+\end{pmatrix} = 168
+\] 
+тут у нас $\chi^2_2$ так как два ограничения  $\Rightarrow$ сравниваем с 6 и снова отвергаем гипотезу $H_0$
+
+\textbf{(d)}
+
+\[
+    \hat p_{ML} = \begin{pmatrix}
+        0.5 \\ 0.2
+    \end{pmatrix}
+    \]
+\[
+I(\hat p_{ML})^{-1} = \begin{pmatrix}
+    \frac{1}{600} && -\frac{1}{1500} \\
+    - \frac{1}{1500} && \frac{2}{1875}
+\end{pmatrix}  = Var(\hat p_{ML})
+\]
+Теперь посчитаем 
+\[
+    Var(\hat p_1 - hat p_2) = Var(\hat p_1) - 2cov(\hat p_1, \hat p_2) + Var(\hat p_2) \approx 0.004
+\]
+
+\textbf{Ответ:}
+\[0.3 - 1.96\sqrt{0.004} \leq p_1 - p_2 \leq 0.3 + 1.96\sqrt{0.004}\]
+
+\section*{Задача 4}
+\textbf{(a)}
+Проверим в лоб линейную зависимость.
+\[
+y_i = f(x_i, \beta_1, \beta_2) = \beta_1 e^{\beta_2x_i}u_i    
+\]
+Проверим по $\beta_1$
+\[
+f(x_i, (\alpha\gamma + \zeta\xi), \beta_2) = (\alpha\gamma + \zeta\xi)e^{\beta_2x_i}u_i =
+\]
+\[
+   = \alpha(\gamma e^{\beta_2x_i}u_i) + \zeta(\xi e^{\beta_2x_i}u_i) = 
+   \alpha f(x_i, \gamma, \beta_2) + \zeta f(x_i, \xi, \beta_2) \Rightarrow линейна
+\]
+Проверим по $\beta_2$
+
+\[
+f(x_i, \beta_1, (\alpha\gamma + \zeta\xi)) = \beta_1 e^{(\alpha\gamma + \zeta\xi)x_i}u_i =
+\]
+\[
+   = \beta_1 e^{\alpha\gamma x_i} e^{\zeta\xi x_i}u_i = 
+   f(x_i, \beta_1, \alpha\gamma) * f(x_i, 1, \zeta\xi) \Rightarrow нелинейна
+\]
+\textbf{(b)}
+Так тут сразу напрашивается замена, ибо мы знаем $\ln u_i \sim  \mathcal{N}(0, 1) $
+сделаем замену, точнее возьмем логарифм от нашей сл. величины, а именно $\xi_i = ln(y_i)$
+\[
+\xi_i = \ln(\beta_1) + \beta_2x_i + \ln(u_i)
+ \]   
+и  теперь мы можем сказать, что 
+$\xi_i  \sim  \mathcal{N}(ln(\beta_1) + \beta_2x_i, 1)$
+\[
+L = \left( \frac{1}{\sqrt{2\pi}}\right) ^ n e^{\sum_i^n\frac{(t_i - \ln\beta_1 - \beta_2x_i)^2}{2} }
+\]
+\[
+l = -\frac{n}{2}\ln(2\pi) + \sum_i^n\frac{(t_i - \ln\beta_1 - \beta_2x_i)^2}{2} 
+\]
+
+\[
+l'_{\beta_1} = -\frac{2}{\beta_1} \sum_i^n\frac{(t_i - \ln\beta_1 - \beta_2x_i)}{2}
+\]
+
+\[
+l'_{\beta_2} = -{2x_i}\ \sum_i^n\frac{(t_i - \ln\beta_1 - \beta_2x_i)}{2}
+\]
+
+
+\[
+    - \frac{2}{\hat \beta_1} \sum_i^n\frac{(t_i - \ln\hat \beta_1 - \hat \beta_2x_i)}{2} = 0 
+    \]
+
+\[-2x_i \sum_i^n\frac{(t_i - \ln\hat \beta_1 - \hat \beta_2x_i)}{2} = 0
+\]
+
+\[
+     \sum_i^n (t_i - \ln\hat \beta_1 - \hat \beta_2x_i) = 0 \]
+    \[ \sum_i^n (t_i - \ln\hat \beta_1 - \hat \beta_2x_i) = 0
+\]
+
+
+\[
+    \hat \beta_1 = e^{\frac{\sum_i^n t_i + n\hat \beta_2x_i}{n}}
+    \]
+\[ \hat \beta_2 = \frac{\sum_i^n t_i - n\ln\hat \beta_1}{x_i}
+\]
+
+
+\end{document}

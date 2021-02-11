@@ -1,0 +1,307 @@
+\documentclass[10pt, a4paper]{extarticle}
+
+%% Язык
+\usepackage{cmap} % Поиск в PDF
+\usepackage{mathtext} % Кириллица в формулах
+\usepackage[T2A]{fontenc} % Кодировка
+\usepackage[utf8]{inputenc} % Кодировка
+\usepackage[english,russian]{babel} % Локализация, переносы
+
+
+\usepackage{wasysym}
+
+
+%% Шрифты
+
+% Serif
+%\usepackage{euscript} % Шрифт Евклид
+%\usepackage{mathrsfs} % Шрифт для математики
+\usepackage{libertinus}
+
+% Sans-serif
+%\renewcommand{\rmdefault}{cmss}
+%\renewcommand{\ttdefault}{cmss}
+%\usepackage{sfmath}
+
+% Настройки для xelatex
+%\usepackage{polyglossia} % Для выбора языка в xelatex
+%\setmainlanguage{russian}
+%\setotherlanguages{english}
+% Ligatures=TeX is on by default
+% https://tex.stackexchange.com/questions/323542/
+%\setmainfont[Ligatures=TeX]{Cantarell}
+%\newfontfamily{\cyrillicfonttt}{Times New Roman}
+%\newfontfamily\cyrillicfont{Cantarell}[Script=Cyrillic]
+%\setsansfont[Ligatures=TeX]{Cantarell}
+%\newfontfamily\cyrillicfontsf{Cantarell}[Script=Cyrillic]
+%\setmonofont{Courier New}
+%\newfontfamily\cyrillicfonttt{Courier New}[Script=Cyrillic]
+
+%% Математика
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{icomma}
+
+% Операторы
+\DeclareMathOperator*\plim{plim}
+\DeclareMathOperator{\sgn}{sign}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\amn}{arg\,min}
+\DeclareMathOperator*{\amx}{arg\,max}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\pCorr}{pCorr}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+% Распределения
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cBinom}{\mathcal{Binom}}
+\newcommand{\cPois}{\mathcal{Pois}}
+\newcommand{\cBeta}{\mathcal{Beta}}
+\newcommand{\cGamma}{\mathcal{Gamma}}
+
+% Множества
+\def \R{\mathbb{R}}
+\def \N{\mathbb{N}}
+\def \Z{\mathbb{Z}}
+
+% Другое
+\newcommand{\dx}[1]{\,\mathrm{d}#1} % Для интеграла: маленький отступ и прямая d
+\newcommand{\ind}[1]{\mathbbm{1}_{\{#1\}}} % Индикатор события
+\newcommand{\iid}{\mathrel{\stackrel{\rm i.\,i.\,d.}\sim}}
+\newcommand{\const}{\mathrm{const}}
+
+%% Изображения
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{wrapfig} % Обтекание рисунков и таблиц текстом
+\usepackage{tikz}
+
+%% Таблицы
+\usepackage{array, tabularx, tabulary, booktabs}
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%% Cписки
+\usepackage{multicol}
+\usepackage{enumitem}
+
+%% Гиперссылки
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{linkcolor}{HTML}{8b00ff}
+\hypersetup{colorlinks = true,
+			linkcolor = linkcolor,
+			urlcolor = linkcolor,
+			citecolor = linkcolor}
+
+%% Выравнивание
+\setlength{\parskip}{0.5em} % Расстояние между абзацами
+\usepackage{geometry} % Поля
+\geometry{
+	a4paper,
+	left=20mm,
+	top=20mm,
+	right=20mm}
+\setlength{\parindent}{0cm} % Отступ (красная строка)
+\linespread{1.0} % Интерлиньяж
+\usepackage[many]{tcolorbox}  
+
+%% Оформление
+
+\newtcolorbox{rulesbox}[1]{%
+	tikznode boxed title,
+	enhanced,
+	arc=0mm,
+	interior style={white},
+	attach boxed title to top center= {yshift=-\tcboxedtitleheight/2},
+	fonttitle=\bfseries,
+	colbacktitle=white,coltitle=black,
+	boxed title style={size=normal,colframe=white,boxrule=0pt},
+	title={#1}}
+	
+	
+
+% Красивый серый фон
+\usepackage{framed} 
+\definecolor{shadecolor}{gray}{0.9}
+
+% Код
+\newcommand{\code}[1]{{\tt #1}}
+
+% Колонтитулы
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{}
+\fancyhead[R]{\thepage}
+
+% Разделы и подразделы
+\usepackage[sf, sl, outermarks]{titlesec}
+\titleformat{\section}{\Large\bfseries\sffamily}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\large\sffamily}{\thesubsection}{0.5em}{}
+
+% Содержание
+%\usepackage{tocloft}
+%\renewcommand{\cftsecfont}{\hspace{4.5em}\normalfont}
+%\renewcommand{\cftsubsecfont}{\hspace{5em}\normalfont}
+%\renewcommand{\cftsecpagefont}{\normalfont\hfill}
+%\renewcommand{\cfttoctitlefont}{\large\normalfont\hfill}
+%\renewcommand{\cftaftertoctitle}{\hfill}
+%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%\renewcommand{\cftsecafterpnum}{\hspace*{5.5em}\hfill}
+%\renewcommand{\cftsubsecafterpnum}{\hspace*{5.5em}\hfill}
+%\renewcommand{\cftsecaftersnum}{.}
+%\renewcommand{\cftsubsecaftersnum}{.}
+
+%% Комментарии
+\usepackage{comment}
+
+%% To-do
+\usepackage{todonotes}
+
+
+
+%% Литература
+\usepackage[backend = biber,
+			bibencoding = utf8, 
+			sorting = nty, 
+			maxcitenames = 4,
+			style = numeric-verb]{biblatex}
+\addbibresource{lit.bib}
+\usepackage{csquotes}
+
+
+% \usepackage{graphicx}
+% \usepackage{color} 
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+
+%% Заголовок
+\title{{\normalsize Прикладная статистика в машинном обучении} \\\vspace{0.5em} Лекция №5}
+\author{Адыгамов Ильяс 181, Болотин Арсений 182, Агаев Фархат 188}
+\date{\rule{15cm}{0.4pt}}
+
+
+\begin{document}
+	
+\maketitle
+	
+\begin{rulesbox}{План лекции}
+\begin{enumerate}
+	    \item Опишем EM алгоритм на другом языке используя дивергенцию Кульбака-Лейблера
+	    \item Изучим Bootstrap: способ построения доверительных интервалов
+\end{enumerate}
+\end{rulesbox}
+
+\subsection*{\textbf{Обозначения}}
+\begin{itemize}
+    \item $\theta = (\theta_1, \; \theta_2, \; \dots, \; \theta_n)$ - вектор неизвестных параметров
+    \item $x = (x_1,\; x_2,\; \dotsc,\; x_n)$ - наблюдения 
+    \item $z = (z_1, \; z_2, \; \dotsc, \; z_n)$ - латентная переменная
+\end{itemize}
+\subsection*{\textbf{Постановка задачи:}}
+Мы хотим максимизировать лографим функции правдоподобия, чтобы найти оценку вектора параметров $\theta$
+\[
+\max_{\theta} \ln p(x|\theta)
+\]
+Однако бывает так, что данная функция имеет такой вид, что максимизировать её сложно. 
+Поэтому мы заменим данную процедуру на \textbf{EM} алгоритм.
+\subsection*{\textbf{EM-алгоритм в общем виде}}
+\begin{itemize}
+    \item[$\blacksquare$] \textbf{Init}. Задать начальные условя для $\theta_{old} := \theta_{init}$
+    \item[$\blacksquare$] \textbf{E-step}. Найти условное распределения латентной переменной $p(z|x, \theta)$
+\end{itemize}
+\[ Q(\theta, \theta_{old})= \E  [  \ln p (x, z | \theta ) ] \]
+
+\begin{itemize}
+    \item[$\blacksquare$] \textbf{M-step}. Максимизируем функцию $Q$ по $\theta$. Получаем $\theta_{new}$. Обновляаем $\theta_{old} := \theta_{new}$
+    \item[$\blacksquare$] \textit{Повторяем E-шаг и M-шаг до сходимости}
+\end{itemize}
+
+
+
+С точки зрения программирования \textbf{M-шаг} довольный легкий, так как есть куча оптимизаторов и максимизировать функцию будет несложно. На \textbf{E-шаге} нужно думать, поэтому заменим на что-то более простое, где нужно будет оптимизировать.
+
+
+То есть глобльная наша цель поручить нахождение $p(z|x, \theta)$ компьютеру. В этом нам поможет дивергенция Кульбака-Лейблера.
+\[
+    KL(q||p_{z|x, \theta}) = CE(q || p_{z|x, \theta}) - H(q)
+\]
+$q$ - распределение кандидат, $\;p_{z|x, \theta}$ - распределение, которое хотим найти.
+
+\subsection*{\textcolor{mypink1}{Напоминание: Дивергенция Кульбака-Лейблера на примере данетки}}
+\[
+     KL(a || b) = CE(a || b) - H(a)
+\]
+
+\begin{itemize}
+    \item $a$ - истинное распределение загадывающего данетку
+    \item $b$ - распределение, которое предполагает разгадывающий данетку
+    \item CE(a||b) - среднее количество вопросов на разгадывание 
+    \item H(a)  - среднее количество вопросов в идеальной ситуации (когда разгадывающий знает истинные вероятности, с которыми загадывающий загадывает данетку)
+    \item CE(a||b) - H(a)  - лишние вопросы, заданные разгадывающим (в среднем)
+\end{itemize}
+
+Также мы знаем, что $KL(a || b) \geq 0$
+
+Первая идея (наивная) давайте попробуем минимизировать дивергенцию Кульбака-Лейблера:
+\[
+\min_{q}KL(q|| p_{z|x, \theta}) 
+\]
+Мы знаем, что в таком случае минимум данной функции будет достигаться когда 
+\[q^* = p_{z|x, \theta}\]
+То есть наивная идея не сработала так как, чтобы выписать $KL$, надо уже знать $p_{z|x, \theta}$. Но, к счастью, сработает лайфхак
+\subsection*{\textcolor{blue}{Лайфхак}}
+\[
+\ln p(x\theta) = KL(q || p_{z|x, \theta}) + LB(q, \theta)
+\]
+\begin{itemize}
+    \item $\ln p(x\theta)$ не зависит от q
+    \item $KL(q || p_{z|x), \theta} \geq 0$ 
+    \item $LB$ - lower bound
+    
+\end{itemize}
+То есть мы попробуем заменить минимизацию $KL$ на такой 
+\textbf{E-шаг:}
+\[
+LB(q, \theta) \rightarrow \max_{q}, \text{ где ответом будет } q^* = p_{z|x, \theta}
+\]
+И в этот моменте произойдет чудо: для записи $LB$ не нужно заранее знать $p_{z|x, \theta}$ 
+\subsection*{\textcolor{mypink1}{Еще одно маленькое напоминание}}
+\[
+CE(q||p) = \int q(z) \log_{\frac{1}{2}} p(z)dz = -\int q(z) \log_{2}p(z)dz \text{ (в битах)}
+\]
+При переводе в наты появится константа
+\[
+= - \int q(z) \ln p (dz) \cdot C
+\]
+А теперь распишем $LB$
+\[
+LB(q, \theta) = \ln p (x|\theta)  - KL(q || p_{z|x, \theta}) = 
+\]
+\[
+= \ln p (x | \theta) - [CE(q||p_{z|x, \theta}) - H(q)] = \ln p(x|\theta) - (-\int q(z) \ln p(z|x, \theta)dz + \int q(z) \ln q(z)dz) = \]
+\[
+= \int q(z) \ln p(x|\theta)dz + \int q (z) \ln p(z|x, \theta)dz -  \int q(z) \ln q(z)dz
+\]
+\[
+ = \int q(z) \cdot \ln \frac{p(x | \theta) \cdot p(z|x, \theta)}{q(z)}dz  =  \int q(z) \cdot \ln \frac{p(x, z | \theta)}{q(z)}dz
+\]
+В итоге как мы можем видеть наша функция $LB$ не зависит от $p_{z|x, \theta}$. \smiley
+
+\end{document}
