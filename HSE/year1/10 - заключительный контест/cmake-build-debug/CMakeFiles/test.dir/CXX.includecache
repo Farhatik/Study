@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/test.cpp
+algorithm
+-
+cstddef
+-
+memory
+-
+iostream
+-
+utility
+-
+tuple
+-
+

@@ -1,0 +1,57 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формулx
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклидxwxx
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{ dsfont }
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand{\Expect}{\mathsf{E}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по мат стату №8}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\section*{Задание №11}
+\[\xi  - \text{ случайная велечина } \]
+Нужно найти:
+\[ \Expect(sin(2 \xi) | tg (\xi)) \]
+Расскроем по триганометрической формуле 
+\[sin(2x) = \frac{2tg(x)}{1 + tg^2(\xi)} \]
+Тогда 
+gолучим
+\[ \Expect(\frac{2tg(x)}{1 + tg^2(\xi)} | tg (\xi)) \]
+теперь Делаем замену  $tg(\xi) = \eta$ по Лемме с лекции получаем
+\[\frac{2\eta}{1 + \eta^2} \cdot \Expect(1 | \eta)\] 
+Далее 
+\[\frac{2\eta}{1 + \eta^2} \]
+
+Ставим обратную замену и получаем  \\\\
+\textbf{Ответ:}
+\[\frac{2tg(\xi)}{1 + tg^2(\xi)} \]
+
+
+\end{document}

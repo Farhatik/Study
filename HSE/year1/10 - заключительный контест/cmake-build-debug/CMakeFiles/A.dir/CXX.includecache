@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/A.cpp
+iostream
+-
+algorithm
+-
+utility
+-
+cstddef
+-
+memory
+-
+string
+-
+map
+-
+vector
+-
+list
+-
+

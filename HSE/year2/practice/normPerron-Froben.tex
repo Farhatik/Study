@@ -1,0 +1,66 @@
+\documentclass{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%%\mathtoolsset{showonlyrefs=false} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{graphicx}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{definition}{Определение}
+\newtheorem{lemma}[theorem]{Лемма}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Доказательство Теоремы Перрона-Фробениуса}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+
+\maketitle
+
+\section*{Определения}
+
+\subsubsection*{Теорема Перрона-Фробениуса для неприводимых матриц}
+    Пусть матрица $A \geq 0$ и неприводима со спектральным радиусом r. 
+    Тогда следующие утверждения верны:
+    \begin{enumerate}
+        \item r - это собственное значения для А;
+        \item Алгебраическая и геометрическая кратность r равна 1;
+        \item r обладает положительным собственным вектором;
+        \item Все собственные значения A с абсолютным значением r имеют кратность 1; 
+        если их кратность h, тогда они являются
+        (комплексными) решениями уравнения $\lambda^h = r^h$
+        \item спектр матрицы А, рассматриваемый как мультимножество, 
+        отображается сам по себе при вращении комплекса
+    
+    \end{enumerate}
+
+
+
+\begin{lemma}
+    Пусть $A \geq 0$- неприводимая матрица. 
+\end{lemma}
+
+
+
+\end{document}

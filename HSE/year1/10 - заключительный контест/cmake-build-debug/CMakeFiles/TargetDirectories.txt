@@ -1,0 +1,7 @@
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/B.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/testik.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/10____.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/test.dir
+/Users/farkhatagaev/CLionProjects/10 - заключительный контест/cmake-build-debug/CMakeFiles/A.dir

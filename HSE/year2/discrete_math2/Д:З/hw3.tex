@@ -1,0 +1,220 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по дискретной математике №3}
+\date{\today}
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+
+\section*{Задача №1}
+Всякий раз перед дождём Петя чихает. Как-то раз Петя
+чихнул. «Значит будет дождь» — подумал он. Правильно ли рассуждал
+Петя?
+\begin{itemize}
+    \item A - Дождь идет
+    \item B - Петя чихнул
+\end{itemize}
+\[A \rightarrow B\] 
+Очевидно, что из этого не следует 
+\[B \rightarrow A\] 
+Следовательно, неправильно.
+\section*{Задача №2}
+\subsection*{Ответ:}
+\[(p \And q \And \bar{r}) 
+\vee ( p \And \bar{q} \And q) 
+\vee (\bar{p} \And q \And r) \]
+Очевидно исходя из таблицы
+
+
+
+
+\section*{Задача №3}
+Построим таблицу истинности для
+\[(u \rightarrow  v) \rightarrow (w \wedge u)\]
+
+\begin{center}
+    \begin{tabular}{ |c|c|c|c| } 
+     \hline
+     $u$ & $v$ & $w$ & $f$ \\ 
+     \hline
+     0 & 0 & 0 & 0 \\ 
+     \hline
+     0 & 0 & 1 & 0 \\ 
+     \hline
+     0 & 1 & 0 & 0 \\ 
+     \hline
+     0 & 1 & 1 & 0 \\ 
+     \hline
+     1 & 0 & 0 & 1 \\ 
+     \hline
+     1 & 0 & 1 & 1 \\ 
+     \hline
+     1 & 1 & 0 & 0 \\ 
+     \hline
+     1 & 1 & 1 & 1 \\ 
+     \hline
+    \end{tabular}
+\end{center}
+\textbf{КНФ}
+\[(u \vee v \vee w) \wedge 
+(u \vee v \vee \bar{w}) \wedge
+(u \vee \bar v \vee w) \wedge
+(u \vee \bar v \vee \bar w) \wedge
+(\bar u \vee \bar v \vee w) \]
+
+
+\section*{Задача №4}
+Доказать в исчислении резолюций несовместность набора
+дизъюнктов $a \vee b, \; b \vee c, \; c \vee d, \; d \vee e, \; e \vee a, \;
+ \bar a \vee \bar b, \; \bar b \vee \bar c, \; \bar c \vee \bar d, \; 
+ \bar d \vee \bar e, \; \bar e \vee \bar a $  \\ \\
+ На лекции была \textbf{теорема} корректности исчисления резолюций 
+
+ \textit{Если у множества дизъюнктов можно вывести пустой дизъюнкт $\Rightarrow$
+это множество несовместно.}\\
+
+\textbf{Правило резолюций}
+\[
+    \frac{A \vee p, \; B \vee \bar{p}}{A \vee B}
+\]
+
+\textbf{Решение}
+\begin{align*}
+    \frac{a \vee b, \; \bar{b} \vee \bar{c}}{a \vee \bar c} \\ \\
+    \frac{a \vee \bar c, \; c \vee d}{ a \vee d} \\ \\
+    \frac{a \vee d, \; \bar{d} \vee \bar{e}}{ a \vee \bar e} \\ \\
+    \frac{a \vee e, \; a \vee \bar{e}}{a \vee a  = a} \\ \\
+    \frac{\bar a \vee \bar b, \; b \vee c}{\bar a \vee c} \\ \\
+    \frac{\bar a \vee  c, \; \bar c \vee \bar d}{ \bar a \vee \bar d} \\ \\
+    \frac{\bar a \vee \bar d, \; d \vee e}{\bar a \vee  e} \\ \\
+    \frac{\bar a \vee \bar e, \; \bar a \vee e}{\bar a \vee \bar a  = \bar{a}}
+\end{align*}
+
+Отсюда, очевидно $\Rightarrow$
+\[
+\frac{a, \; \bar{a}}{Пустой \;дизъюнкт}
+\]
+
+ЧТД
+ 
+\section*{Задача №5}
+Можно ли в исчислении резолюций из набора дизъюнктов 
+$p \vee q, \; \bar p \vee q \vee r, \; p \vee \bar q \vee r, \;
+\bar p \vee \bar r, \; p \vee \bar q \vee \bar r$
+вывести пустой дизъюнкт?
+
+\begin{align*}
+    &\frac{p \vee \bar q \vee r, \; p \vee \bar q \vee \bar r}{p \vee \bar q} \\ \\
+    &\frac{p \vee q, \;p \vee \bar q}{p} \\ \\
+    &\frac{p \vee q, \;\bar p \vee q}{q} \\ \\
+    &\frac{p, \; \bar{p} \vee  \bar r}{\bar r} 
+\end{align*}
+Если $p = 1, \; q = 1,\; r = 0 \Rightarrow$ совместен набор $\Rightarrow$ 
+невозможно вывести пустой дизъюнкт.
+
+\section*{Задача №6}
+Добавим к исчислению резолюций правило, которое позволяет вывести из дизъюнкта
+$A$
+любой дизъюнкт вида
+$A \vee B$
+Расширит
+ли это добавление возможности исчисления резолюций (можно 
+ли будет с помощью этого правила доказать несовместность какого-нибудь
+набора дизъюнктов, для которого раньше это было невозможно)?
+
+\textbf{Ответ:} Данное правило никак не расширит возможности исчисления резолюций.
+Так как если множество было несовместным, то очевидно, что мы могли получить пустой дизъюнкт.
+Данный дизъюнкт мы получим ровно таким же образом. Если множество было совместным, 
+то было означивание, при котором будет верно $A$ и $A \vee B$ 
+(ибо если $A$ - истинный, то очев, что $A \vee B$)
+
+\section*{Задача 7}
+Вывести в исчислении высказываний формулу 
+$p \rightarrow ((p \rightarrow q) \rightarrow q)$
+(можно пользоваться леммой о дедукции)
+\begin{enumerate}
+    \item Используем Модус Понус  
+    \\ $p, \; p \rightarrow q \vdash q$
+    \item  Используем лемму о Дедукции и получаем.
+     \\ $p \vdash (p \rightarrow q) \rightarrow q$
+    \item Используем лемму о Дедукции и получаем.
+     \\ $\vdash p \rightarrow 
+     (p \rightarrow q) \vdash (p \rightarrow q) \rightarrow q$
+\end{enumerate}
+\section*{Задача 8}
+a) \begin{enumerate}
+    \item $\vdash ((p \rightarrow q) \rightarrow p) \rightarrow p$ \\
+    \item  Используем лемму о Дедукции \\ 
+    $(p \rightarrow q) \rightarrow p) \vdash p$ \\
+    \item Используем правило исчерпывающего разбора случаев \\
+    \\ 1. $(p \rightarrow q) \rightarrow p), \; p \vdash p$,
+     2. $(p \rightarrow q) \rightarrow p), \; \bar p \vdash p$
+\end{enumerate}
+\[1. \;(p \rightarrow q) \rightarrow p), \; p \vdash p \; [\text{Ибо } p \vdash p] \]
+\begin{align*}
+    &2.\;(p \rightarrow q) \rightarrow p), \; \bar p \vdash p \\
+    &Аксоима \; 9 \\ 
+    &\bar{p} \rightarrow (p \rightarrow q) \\
+    &Для \; \bar{p}, \; \bar{p} \rightarrow (p \rightarrow q) \; 
+    \; используем \; Модус \; Понус  \\
+    & Получаем \; (p \rightarrow q) \\
+    &Для \; (p \rightarrow q), \; (p \rightarrow q) \rightarrow p \; 
+    \; используем \; Модус \; Понус \\
+    & Получаем \; p
+\end{align*}
+б) \begin{enumerate}
+    \item Аксиома 1
+    \\ $p \vee \bar p$
+    \item Аксиома 2 \\
+    $(p \rightarrow q) \rightarrow (p \rightarrow q) \vee p$
+    \item Аксиома 3 \\
+    $p \rightarrow (p \rightarrow q) \vee p$
+    \item Аксиома 4 \\
+    $\bar p \rightarrow (p \rightarrow q)$
+    \item Аксиома 5 \\
+    $(p \rightarrow (p \rightarrow q) \vee p) \rightarrow 
+    ((\bar p \rightarrow (p \rightarrow q) \vee p) \rightarrow((p \vee \bar p) 
+    \rightarrow (p \rightarrow q) \vee p))$
+    \item Используем правило сечения для 2 и 4 \\
+    Получаем $\bar p \rightarrow (p \rightarrow q) \vee p$
+    \item Используем Модус Понус для 3-ей строчки и 5-ой\\
+    $(\bar p \rightarrow (p \rightarrow q) \vee p) \rightarrow((p \vee \bar p) 
+    \rightarrow (p \rightarrow q) \vee p)$
+    \item Используем Модус Понус 6-ой и 7-ой\\
+     $(p \vee \bar p) 
+    \rightarrow (p \rightarrow q) \vee p$
+    \item Используем Модус Понус для 1-ой   и 8-ой и получаем \textbf{ответ}\\
+    $(p \rightarrow q) \vee p$
+\end{enumerate}
+
+
+\end{document}
+

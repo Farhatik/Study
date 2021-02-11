@@ -1,0 +1,239 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{graphicx}
+\usepackage{amsfonts}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Фархат Агаев}
+\title{Домашнее задание по дискретной математике №4}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+
+
+\section*{Задача №1} 
+\textbf{Сигнатура:}
+\begin{align*}
+    &M(x) - \text{быть мужчиной} \\
+    &F(x) - \text{быть женщиной} \\
+    &C(x, y) - \text{$x$ и $y$ состоят в браке} \\
+    &P(x, y) - \text{$x$ родитель $y$}
+\end{align*}
+\textbf{\textit{Отношение 
+"$x$ брат $y$"}}
+
+$x$ - парень, есть общие родители с $y$ и не равны.
+\[B(x, y) = M(x) \wedge \exists z (P(z, y) \wedge P(z, x))
+ \wedge \neg(x = y)\]
+\textbf{\textit{Отношение 
+"$x$ является тёщей $y$"}}
+
+$x$ - женщина, мать жены,
+$y$ - мужчина, есть жена. 
+\[
+    D(x, y) = M(y) \wedge
+    \exists z (F(z) \wedge C(z, y) \wedge P(x, z))
+    \wedge F(x) 
+\]
+\textbf{\textit{Отношение 
+"$x$ является племянником $y$"}}
+
+$x$ - сын брата или сестры
+
+Выразим аналогично вначале \textbf{\textit{отношение "$a$ сестра $b$"}}
+\[S(a, b) = F(a) \wedge \exists с(P(с, a) \wedge P(с, b))
+ \wedge \neg(a = b)\]
+ 
+ Отношение "$x$ является племянником $y$"
+\[L(x, y) = M(x) \wedge
+ \exists z(\,(B(z, y) \vee S(z, y)) \wedge P(z, x)) 
+ \wedge \neg (x = y) \]
+\textbf{\textit{Отношение 
+"$x$ внук $y$"}}
+
+у $x$ есть родитель $z$, он (или она) ребенок $y$.
+\[K(x, y) = M(x)  \wedge  \exists z(P(z,x) \wedge (P(y,z)) \wedge \neg (x = y) \]
+
+
+\section*{Задача №2} 
+\textbf{Сигнатура:}
+\[C(x, y) - x \text{ обманул } y\]
+Запишем формулой каждый кого-то обманул:
+\[\forall x_1 \, \exists y_1 \, (C(x_1, y_1))\]
+Запишем формулой каждый кем-то обманут:
+\[\forall  x_2\, \exists  y_2 \, (C(y_2, x_2))\]
+Запишем формулой нет того, кто обманул всех:
+\[\neg (\exists  x_3\, \forall  y_3 \, 
+(C(x_3, y_3))) = \forall x_3 \exists y_3 \,(\neg C(x_3, y_3))\]
+\textbf{Ответ:}
+\[\forall x_1 \, \exists y_1 \, (C(x_1, y_1)) \wedge 
+\forall  x_2\, \exists  y_2 \, (C(y_2, x_2)) \wedge
+\forall x_3 \exists y_3 \,(\neg C(x_3, y_3))
+    \]
+    
+\section*{Задача №3} 
+\textbf{Сигнатура:}
+
+\[
+    \mathbb {R}, 0, +, \times, <, = 
+\]
+Очевидно, что нам нужно несколько условий для того, чтобы многочлен
+$ax^3 + bx^2 + bx + c$ имеел корень
+\begin{enumerate}
+    \item $a \neq 0$, чтобы степень многочлена была равна 3.
+    \item при подстановки x, многочлен должен быть равен 0.ъ
+\end{enumerate} 
+\textbf{Ответ:}
+\[\forall a \forall b \forall c \forall \exists x 
+(\neg (a = 0) \wedge
+ (a \times x \times x \times x  + b \times x \times x + c \times x + d = 0)
+ )\]
+\section*{Задача №4}
+\textbf{Сигнатура:}
+\[
+    \mathbb {N}, +, \times, = 
+    \]
+Выразим предикат быть делителем:
+\[
+    D(d, x) = \exists y(x = dy) 
+\]
+Тогда просто выразить предикат $x =$ НОД$(y,z)$
+\begin{align*}
+  B(x, y, z) = D(x, y) \wedge D(x, z) \wedge \neg(\exists a(k = x + a
+   \wedge D(k, y) \wedge D(k, z) )  
+\end{align*}
+\section*{Задача №5} 
+    $[\forall x (P(x) \rightarrow Q(f(x)) 
+    \wedge \forall x (Q(x) \rightarrow P(f(x))
+    )
+    \wedge \forall x f(f(x)) = f(x)] \rightarrow 
+    [
+        \exists x (P(x) \vee Q(x) \rightarrow  \exists x (P(x) \wedge Q(x))
+    ]
+    $
+    \\
+    Рассмотрим случай когда данная импликация может быть равна нулю.
+    Первая часть $[\forall x (P(x) \rightarrow Q(f(x)) 
+    \wedge \forall x (Q(x) \rightarrow P(f(x))
+    )
+    \wedge \forall x f(f(x)) = f(x)] = 1$, а вторая $ [
+        \exists x (P(x) \vee Q(x) \rightarrow  \exists x (P(x) \wedge Q(x))
+    ] = 0$. Тогда рассмотрим дальше вторую часть откуда следует, что 
+   $ \exists x (P(x) \vee Q(x)) = 1$, а $\exists x (P(x) \wedge Q(x)) = 0$, тогда должно быть так 
+   $P(x) = 0$, $Q(x) = 1$ или   $P(x) = 0$, $Q(x) = 1$
+   Попробуем разобраться с первой частью если $P(x) = 1$, $Q(x) = 0$.
+   Все конъюкты должы быть истинными. из второго конъюкта 
+   $\forall x (Q(x) \rightarrow P(f(x))$,
+    очев, что  P(f(x)) должна быть истина, теперь хитрый трюк, подставляем 
+    переменную $f(x)$ в первый конъюкт получаем 
+    $\forall f(x) (P(f(x)) \rightarrow Q(f(f(x)))$ пользуемся третьим конъктом
+    получаем $\forall f(x) (P(f(x)) \rightarrow Q(f(x))) \Rightarrow$ $\forall x Q(f(x)) = 1$,
+    противоречие. Те же самые рассуждения для второго случая.
+\section*{Задача №6}
+\[
+    \forall x \, g(f(x)) = x \wedge \exists y \forall x \neg f(x) = y
+\]
+
+Да является, пусть  $M = \mathbb{N}$, определим ф-ию $f(x) = 10x$ для всех $x$.
+ф-ию $g(x) = \frac{x} {10}$ только для х кратных 10, для всех остальных x, ф-ия g(x)= 12345.
+Тогда очевидно, что условие выполняется для 
+\[
+    \forall x \, g(f(x)) = x
+\]
+Также например $y = 123$ - число не кратное 10.
+Мы с помощью ф-ию $f$ не сможем получить такое число $\Rightarrow$
+выполняется вторая часть.
+
+\[
+    \exists y \forall x \neg f(x) = y
+\]
+
+
+\section*{Задача №7}
+Теория называется совместной, если существует интерпритация в которой все формулы истины \\
+\textbf{a)}
+Первая формула $\exists x \forall y \neg P(x, y)$, существует такой х, что в отношение предиката P с любым
+элементом будет всегда ответ будет ложным. Пусть этот $x = a$, тогда во второй формуле. 
+$\exists y \forall x P(x, y)$ подставив  $P(y, a)$ должен быть истинным, но по первой формуле он ложный 
+$\Rightarrow$ противоречие. \\
+\textbf{b)}
+\textbf{Ответ: да.}
+Если перевести первую формулу $\forall x \neg P(x, x)$ означает антирефлексивность.
+Вторая $\forall x \forall y \forall z (P(x, y) \wedge P(y, z) \rightarrow) P(x, z)$ означает транзитивность.
+Последняя формула сущетсвует пара такая, что 
+$\exists x \exists y (P(x, y) \wedge P(y, x))$
+\\ Приведу интерпритацию. 
+
+Пусть $P(x, y)$ = взаимно ли просты числа $x$ и $y$.
+
+$M = \{ \mathbb{N}$ без нуля и единицы\}. Отсюда сразу все очевидно.
+Натуральное число не взаимно просто с самим с собой. Вторая формула тоже выполняется. 
+Третья вообще для любых (пусть $x = 2$ и $y = 3$) \\
+\textbf{с)}
+\textbf{Ответ: да.}
+Первая формула $\forall x P(x, x)$ означает рефлексивность.
+Вторая $\forall x \forall y \forall z (P(x, y) \wedge P(y, z) \rightarrow) P(x, z)$ означает транзитивность.
+Третья формула, что у каждого x есть пара $\forall x \exists y P(x, y)$.
+Последняя формула
+$\exists x \exists y \neg(P(x, y) \wedge P(y, x))$
+\\ Приведу интерпритацию.
+
+ P(x, y) = кратность.
+Очевидно выполняется первая и вторая формула, третья также выполняется если y = x, 
+чтобы выполнилась последняя формула возьмем пару ($x = 4$ и $y = 2$).
+\section*{Задача №8}
+Для доказательства воспользуемся таким утверждением. \\
+Пусть $T = \{U_1, U_2, \ldots, U_n\}$ - теория. U - формула \\ 
+\[T \models A \ \Leftrightarrow \; \vdash (U_1 \wedge ...  \wedge U_n) \rightarrow U\]
+\textbf{a)}
+\[
+   \models (\forall x Q(x) \wedge \forall(Q(x) \rightarrow P(x)) \rightarrow \forall x P(x)
+\]
+Очевидно, что если $Q(x) = 0$ то из лжи следует что угодно и получается истина.
+Пусть $Q(x) = 1$, тогда во втором конъюнкте $P(x)$ должен быть равен 1, иначе получаем ту же 
+ситуцию, а так как $P(x) = 1$, то очевидно истинность всей формулы. \\ 
+\textbf{b)}
+\[
+   \models (\exists x Q(x) \wedge \forall x(Q(x) \rightarrow P(x)) \rightarrow \exists x P(x)
+\]
+Аналогично с пунктом а. нули не рассматриваем. $\forall x(Q(x) \rightarrow P(x) \Rightarrow P(x)$ тоже единица.
+Рассуждения те же самые.\\
+\textbf{c)}
+\[
+   \models (\exists x Q(x) \wedge \forall x(P(x) \rightarrow Q(x)) \rightarrow \exists x P(x)
+\]
+\textbf{Ответ: нет}. Пусть не сущетсвует такого $P(x)$, данное условие не будет 
+противоречить импликации, также $Q(x) = 1$, то есть $\exists xP(x) ложно$, а $\forall x Q(x)$ истина, 
+в таком случае импликация тоже истина, а все выражение ложно.  
+\\\textbf{d)}
+
+\[
+   \models (\forall x Q(x) \wedge \forall(P(x) \rightarrow Q(x)) \rightarrow \forall x P(x)
+\]
+Очевидно, что нет. Аналогчно рассмотрим лишь крайний случай. Пусть $Q(x) = 1$, тогда в 
+заключение будет 1, следовательно  посылка может быть отрицательной $(P(x) = 0)$ и тогда получаем, что в данном случае
+формула может выдать 0. (1 $\rightarrow$ 0)
+\end{document}

@@ -1,0 +1,194 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{graphicx}
+\usepackage{amsfonts}
+
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Фархат Агаев}
+\title{Домашнее задание по дискретной математике №5}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\section*{Задача №1}
+Предваренная нормальная форма выглядик так:
+\begin{align*} 
+    &Q_i \in \{\exists, \; \forall\} \\
+    &X_i - \text{ переменные} \\
+    &\phi - \text{формула без кванторов} \\
+    &Q_1 X_1 \cdots Q_n X_n\phi
+\end{align*}
+Сколемевская нормальная формула - предваренная нормальная формула 
+без квантаров существования.
+\begin{align*}
+    &\textbf{a)} \exists x \forall y P(x, y) \wedge \forall x \exists y Q(x, y) \\
+    &\exists x \forall y P(x, y) \wedge \forall z \exists w Q(z, w) \\
+    &\exists x \forall y \forall z \exists w  \, P(x, y) \wedge Q(z, w) - \text{пред. норм. ф.}
+\end{align*}
+Чтобы избавиться от квантора существования, который стоит до кв. всеобщности,
+то достаточно заменить переменную на константу 'c', если стоит после,
+то нужен функциональный символ 'f', который принимает переменные, стоящие до и под знаком кв. всеобщности.
+\begin{align*}
+    \forall y \forall z P(c, y) \wedge Q(z, f(y, z)) -\text{ скол. н. ф.}
+\end{align*} 
+Повторим процеду0ры для пункта б.
+\\
+\begin{align*}
+    \neg \forall x (\exists y P(x, y) \rightarrow \exists y Q(x, y)) \\
+    \exists x (\exists y P(x, y) \rightarrow \exists y Q(x, y)) \\
+    \exists x \forall y (P(x, y) \rightarrow \exists y Q(x, y)) \\
+    \exists x \forall y \exists z(P(x, y) \rightarrow  Q(x, z)) - \text{ пред. ф.} \\
+    \forall y(P(c, y) \rightarrow  Q(c, f(y))) - \text{ скол. н. ф.}
+\end{align*}
+
+\section*{Задача №2}
+\textbf{a) Условие:}
+\begin{enumerate}
+    \item $\forall x P(x, f(x))$,
+    \item $\forall z Q(x, z)$, 
+    \item $\forall x \forall y \forall z (\neg P(x, y) \vee \neg P(y, z) \vee \neg Q(x,z)) $
+\end{enumerate}
+Для того, чтобы доказать невыполнимость 
+набора универсальныъ дизъюнктов, нужно вывести с помощью ИР пустой дизъюнкт.
+\\
+\textbf{4}. Во втором пункте возьмем $z = f(f(x))$ и получим $ Q(x, f(f(x)))$ \\
+\textbf{5}. Третий пункт $y = f(x), z = f(f(x))$ и получим\\
+$\neg P(x, f(x)) \vee \neg P(f(x), f(f(x))) \vee \neg Q(x,f(f(x))) $\\
+\textbf{6}. Используем ИР для 1 и 4 и получим \\
+$\neg P(f(x), f(f(x))) \vee \neg Q(x,f(f(x))$ \\
+\textbf{7}. Используем ИР для 6 и 4 и получим \\
+$\neg P(f(x), f(f(x))) $ \\
+\textbf{8}. Для первого берем  $x = f(x)$ \\
+$P(f(x), f(f(x)))$ \\
+\textbf{9}. Используем ИР для 7 и 8 и получаем пустой дизъюнкт\\
+
+\textbf{b) Условие:}
+\begin{enumerate}
+    \item $\forall x \exists y P(x, y)$
+    \item $\forall x \forall y \forall z (P(x, y) \wedge Q(y, z) \rightarrow R(x, z))$
+    \item $\exists x \forall y \neg R(x, y)$
+    \item $\forall \exists y Q(x,y)$ \\
+\end{enumerate}
+
+\textbf{Действия:}
+\begin{enumerate}
+    \item возьмем используя первую формулу (х какая-та константа) $\; P(x, f(x))$
+    \item Возьмем используяю вторую формулу  \\
+    $\neg P(x, f(x)) \vee \neg Q(f(x), g(f(x))) \vee R(x, g(f(x)))$
+    \item $\neg R(x, g(f(x)))$
+    \item $ Q(f(x), g(f(x))$ 
+    \item Используем ИР для 1 и 2 и получаем \\
+    $\neg Q(f(x), g(f(x))) \vee R(x, g(f(x)))$
+    \item Используем ИР для 4 и 5 и получаем \\
+    $\neg R(x, g(f(x)))$
+    \item Используем ИР для 6 и 3 и получаем пустой дизъюнкт\\
+\end{enumerate}
+
+
+\textbf{c) Условие:}
+\begin{enumerate}
+    \item Доказать общезначимость: \\
+    $\forall x \exists y P(x, y) \rightarrow \exists x \exists y P(x, x)$
+\end{enumerate}
+Чтобы док-ть
+общезначимость достаточно док-ть невыполнимость ее отрицания.
+\begin{enumerate}
+    \item $\forall x \exists y P(x, y)$
+    \item $ \forall x \forall y \neg P(x, x) $
+\end{enumerate}
+\textbf{Действия:}
+\begin{enumerate}
+    \item $\forall x P(x, f(x)$
+    \item пусть $x = f(x)$ \\
+    $P(f(x), f(x)$
+    \item во второп пункте выше возмем x = f(x) и получим:
+    $\neg P(f(x), f(x)$
+    \item Очев.
+\end{enumerate}
+\textbf{d) Условие:} 
+Доказать, что из формул:
+\begin{enumerate}
+    \item $\forall x \exists y(P(x, y) \rightarrow Q(x))$
+    \item $\forall x \forall y \forall z (P(x, y) \rightarrow P(x, z))$
+    \item $\exists x \exists y P(x, y)$ 
+\end{enumerate}
+Cемантически следует формулу $\exists x Q(x)$. \\
+Для этого нужно доказать невыполнимость данной формулы
+\[
+    \neg(\forall x \exists y(P(x, y) \rightarrow Q(x)) \wedge
+    \forall x \forall y \forall z (P(x, y) \rightarrow P(x, z)) \wedge
+    \exists x \exists y P(x, y) \rightarrow \exists x Q(x).)
+\]
+Как и раньше расскроем отрицание, потом убререм импликацию и выведем пустой дизъюнкт.
+
+\begin{enumerate}
+    \item $\forall x \neg P(x, f(x) \vee \forall x Q(x))$
+    \item $\forall x \forall y \forall z (\neg P(x, y) \vee P(x, z))$
+    \item $P(x, y)$
+    \item $\forall x \neg Q(x)$
+    \item Используем ИР для 1 и 4: \\
+    $\forall x \neg P(x, f(x))$
+    \item испоkьзуя 2 пункт получим: \\
+    $(\neg P(x, y) \vee P(x, f(x)))$
+    \item Используем ИР для 5 и 7 полуаем пустой дизъюнкт.
+    $P(x, f(x))$
+    
+\end{enumerate}
+
+\section*{Задача №5}
+\textbf{a)}
+($(\mathbb{N}, *, =)$ и $((\mathbb{Z}, *, =)$) изоморфны ли? \\
+Очевидно, что нет. так в натуральных числах данное уравнение $x \cdot y \cdot 2 = 2$
+Имеет лишь одно ркешение при x = 1, y = 1, в то время как в целых числах два решения при x = 1, y = 1 
+и x = -1, y = -1. \\ \\
+\textbf{b)}
+Да. Предоставлю изоморфизм.
+0 переходит в 0, 1 переходит в 3, 2 переходит в 1, 3 переходит в 4, 2 переходит в 2.
+То есть проверим напрямую. $x - y = 2.$ \\
+$\phi(x) - \phi(y) = 1$
+Например $x = 2, y = 0.$
+Тогда 
+$\phi(x) = 1, \; \phi(y) = 0 $\\ 
+1 - 0 = 1.
+\section*{Задача №3}
+Есть два предиката P, Q;
+Они выдают True или False $\Rightarrow$ для любого x, мы можем выдать всего 
+4 разных варианта использую два предикита 
+
+[T, T], [F, F], [T, F], [F, T]. 
+\\
+То есть, если мы разобьем наше n элментное множество на 4 класса,
+если размеры классов будут совпадать,
+тогда мы сможем
+построить изоморфизм переводя из одной модели в другую в нужные классы. То есть чтобы 
+модели не были изоморфны нам нужно разбить множество на классы с разным кол-ом элеменитв.
+Таким образом мы можем решить задачу с помощью шаров и перегородок поделив на 4 класса (3 перегорадки понадобятся)
+\textbf{Ответ:}
+\[
+  C^n_{n+3}  
+\]
+
+\end{document}

@@ -1,0 +1,65 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{ dsfont }
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand{\Expect}{\mathsf{E}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по мат стату №3}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\section*{Задача №10}
+(a)
+ $\eta$ имеет плотность $\rho(x) = 1 - |x|$ при $|x| \leq 1$ 
+и $\rho(x) = 0$ при $|x| > 1$
+ \[
+   \phi_{\eta}(t) = \mathds{E}e^{it\eta} = \int_{-\infty}^{+\infty}e^{itx}\rho(x)dx = \int_{-1}^{1} e^{itx}(1 - |x|)dx = -\frac{e^{-it}(-1 + e^{it})^2}{t^2}
+    \]
+(b) Мы знаем, что $A,U,V$ - нез. сл. вел. и соответ хар. ф-ии 
+$\phi_u, \phi_v$ также $P(A = 1) = 1 - P(A = 0) = p$ 
+Воспользуемся независимостью случ. вел. и раскроем по линейности хар. ф-ию
+для случайной величины  $\eta = AU + (1 - A)V$.
+\[
+   \phi_{\eta}(t) = \mathds{E}e^{it\eta} = \mathds{E}e^{it(AU + (1 - A)V)} = 
+   \mathds{E}e^{itAU}e^{it(1 - A)V}
+    \]
+    \[
+        \mathds{E}{e^{itU}}^Ae^{itV^{(1 - A)}} = (\phi_u\phi_v)^p
+    \]
+\section*{Задача №11}
+Ответ, очевидно, что да является существует. Распишем
+
+\[
+\phi_Y(t) = \mathds{E}costX = \mathds{E}\frac{1}{2} e^{itX} + \frac{1}{2}e^{-itx} 
+= \mathds{E}e^{itX\xi}
+\]
+$X, \xi$ - независимые и $\xi$ принимает значение 1 или -1 с вер. $\frac{1}{2}$
+ 
+\end{document}

@@ -1,0 +1,189 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{graphicx}
+
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Фархат Агаев}
+\title{Домашнее задание по дискретной математике №2}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\newpage
+\section*{Задача №1}
+Для начала докажем, что данная ф-ия вычислима:
+\begin{equation*}
+    \phi_{(m,n,k)}(x) = 
+    \begin{cases}
+        \phi_n(x) & \text{если } \phi_m(x) = 0 \\
+        \phi_k(x) & \text{если } \phi_m(x) > 0 \\
+        \text{не определено}& \text{если } \phi_m(x) \text{ не определено} \\
+    \end{cases}
+\end{equation*}
+
+Так как ф-ии $\phi_n(x), \; \phi_m(x) \;, \phi_k(x)$ - вычислимы, то очевидно,
+что и наша ф-ия $\phi_{(m,n,k)}(x)$ также вычислима (ибо мы вначале просто считаем $\phi_m(x)$ и дальше если нужно 
+считаем другие вычичслимые ф-ии). 
+
+Пусть у нас будет ф-ия которая переводит из пары натуральных чисел в натуральное число
+\[ code_2(m,n) = 2^m \cdot (2n + 1) - 1\]
+очевидно, что данная ф-ия - биекция, так как мы можем однозначно получить обратно два числа $m, n$ \\
+Представим натуральное число $x$ в виде двоичной формы (сразу увидим нужные нам ф-ии)
+\[ x  + 1 = \underbrace{10....01}_{2n + 1} \underbrace{000...0}_m\]
+Теперь довольно просто получить \[code_3(m, n, k) = code_2(code_2(m, n), k)\]
+
+% Теперь воспользуемся свойством главности ф-ии и получим то, что мы искали
+\noindent так как $\{\phi_i\}$ - главная $\Rightarrow$ для любой выч. час. ф-ии $V(a, x)$ 
+существует тотальная выч ф-ия $s: N \rightarrow N$ такая, что 
+\[ \phi_{s(a)}(x) = V(a, x)\]
+
+Пусть $V(a, x) = V(code_3(m, n, k), x) = \phi_{s(code_3(m,n,k))}(x)$ и тут сразу становится понятно, 
+\subsection*{Ответ} 
+\begin{align*}
+    h(m, n, k) = s(code_3(m, n, k))
+\end{align*}
+
+\newpage
+\section*{Задача №2}
+
+Пусть 
+\begin{equation*}
+    f(x) = 
+    \begin{cases}
+       100 &\text{если } \phi_x(x) = 59\\
+       59  & \text{иначе } \\
+    \end{cases}
+\end{equation*}
+вычислима, тогда $\exists k$, $\phi_k(x) = f(x)$ посмотрим на значение ф-ии при 
+x = k, тогда 
+\begin{equation*}
+    \phi_k(k) = 
+    \begin{cases}
+       100 &\text{если } \phi_k(k) = 59\\
+       59  & \text{иначе } \\
+    \end{cases}
+\end{equation*}
+Такое невозможно.
+
+
+ 
+\section*{Задача №3}
+Мы знаем, что существует перечислимое неразрешимое множество.
+Возьмем 
+\begin{equation*}
+    X = \{x \;| \;\phi_x(x) определено\}  
+\end{equation*}
+
+\noindent$X$ - перечислимое $\Rightarrow$ существует алгоритм перечисления $P$\\
+Запускаем P и он выдает какие-то $x_i$, которые мы будем присваивать нашей ф-ии $f(i) = x_i$
+И тут сразу получаем искомую тот. ф-ию 
+\[f:N \rightarrow N\]
+очев, что $Dom(f) = N$ - разрешимое множество, $Range(f) = X$  - неразрешимое перечислимое множество.
+
+
+\section*{Задача №4}
+\begin{align*}
+    &A = \{i \; | \; \phi_i(0) \; не \; определено\} \\
+    &B = \{i \; | \; \phi_i(0) = 1\}
+\end{align*}
+
+ 
+% Мы знаем, что $X = \{x \;| \;\phi_x(x) \;определено\}$ - перечислимое неразрешимое множество.
+% Пусть множесто А разрешимо.
+
+
+% тогда 
+% \[V(n, x)\ = 
+% \begin{cases}
+%     2000 \quad &n \in A \\ 
+%     \text{не опред} &n \notin A
+% \end{cases} \] 
+% Очевидно, что ф-ия $V $- вычислимa
+% \[V(n, x) \simeq 2000 \cdot \omega_A(x)\]
+% Следовательно существует выч. тот ф-ия $S:N \rightarrow N$ такая, что \\  
+% \[\forall n, x: \phi_{s(n)}(x) \simeq V(n, x)\]
+% Рассмотрим случай когда $x = s(n)$/ 
+% \begin{align*}
+%     &\forall n: \phi_{s(n)}(s(n)) \simeq V(n, s(n)) \\
+%     &s(n) \in X \Leftrightarrow \phi_{s(n)}(s(n)) \text{ опр }  \Leftrightarrow\\
+%     &\Leftrightarrow V(n, s(n)) \text{ опр } \Leftrightarrow n \in A
+% \end{align*}
+% Получили сводимость $ A \leq_m X$.  ............
+
+\section*{Задача №5}
+ Пусть у нас есть два коперечеслимых множества перечеслимы,
+ которые не пересекаются.
+ $A, \; B,\; A \cap B = \varnothing, \; N \setminus A, \; N\setminus B$ -  перечислимые мн-ва
+множество С - разрешимо. Запускаем два перечислятора  $\; N \setminus A, \; N\setminus B$.
+Мы сможем получить харак. ф-ию множества С. Запускаем два перечислятора  
+$i_{N \setminus B} \in \; N \setminus A, \; i_{N \setminus B} \in \;
+ N\setminus B,$ если  первым $x = i_{N \setminus B}$ Хар. ф-ия выдает 1, 
+ иначе это число выдаст второй перечислятор и хар ф-ия выдаст 0. $\Rightarrow$ C - разрешимо.
+ 
+
+\section*{Задача №8}
+Положим \[V(i, x) = i + x\]
+так как $\phi$ - главная $\Rightarrow \exists \text{ тотальная вычислимая ф-ия }s:N \rightarrow N $ такая, что:
+\[\phi_{s(i)}(x) = V(i, x)\]
+По  теор. Клини о неподвижной точке $\Rightarrow$
+\[\exists \; i \; \phi_i(x) = \phi_{s(i)}(x) = V(i,x) = i + x \]
+\section*{Задача №7}
+Воспользуемся двумя фактами:
+\begin{enumerate}
+    \item Теорема Поста: 
+    Если $A$ и $N \setminus A$ перечеслимы, то $А$ - разрешимо.
+    \item Множество значений тотальной ф-ии перечислимое множество.
+\end{enumerate}
+Пусть 
+\begin{equation*}
+    A = \{x \;| \;\phi_x(x) определено\}, \; B = N \setminus A  
+\end{equation*}
+Мы знаем А - неразрешимо и перечеслимо, B неперечесимо, 
+иначе у нас будет противоречие с первым пунктом.\\
+Допустим, что $A \leq_m B$, тогда:
+\[\exists \text{ тотальная вычислимая ф-ия } f: N \rightarrow N, \; x \in A \Leftrightarrow f(x) \in B \]
+но в таком случае будет противоречие с пунктом 2. 
+
+\section*{Задача №6}
+
+\begin{align*}
+    &A - \text{ перечислимое } \\
+    &B = \{i \; | \; \phi_i(2) = \phi_i(3) \text{ и опр}\} \\
+    &\omega(n, x) = \begin{cases}
+        1 &n \in A\\
+        неопр &n \notin A
+    \end{cases} 
+\end{align*} 
+Очевидно, что ф-ия $\omega$ - вычислима, так как А - перечислимое $\Rightarrow$ полуразрешимо 
+$\Rightarrow$  существует полухарактеристическая ф-ия $\omega$
+а значит   $\exists $ тотальная вычислимая ф-ия  $s: N \rightarrow N$ такая, что:
+\[\omega(n,x) = \phi_{s(n)}(x)\] 
+для любого x, очев, что при x = 2  и x = 3 и опр, наша ф-ия $\omega = 1$,
+мы можем заметить, что $n \in A \Leftrightarrow s(n) = i \in B$ \\
+Таким образом мы свели $ A \leq_m B$
+
+\end{document}
+

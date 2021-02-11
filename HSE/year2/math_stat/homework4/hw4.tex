@@ -1,0 +1,75 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{ dsfont }
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand{\Expect}{\mathsf{E}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по мат стату №3}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+
+\section*{Задача 4c}
+Решали на семе
+\[\gamma = 
+\frac{\xi + \zeta \cdot \eta}{\sqrt{1 + \zeta^2}}\]
+
+\[\varphi_{\gamma} = \mathds{E} e^{it\gamma} 
+= \int\int\int e^{it\frac{x + z\cdot y}{\sqrt{1 + z^2}}} \cdot \rho(x) \rho(y) \rho(z) dx dy dz 
+\]
+ \[= \int \mathds{E} e^{it\frac{\xi + \eta \cdot z}{\sqrt{1 + z^2}}} \rho(z) dz =
+  \int \mathds{E} e^{\frac{it\xi}{\sqrt{1 + z^2}}} \cdot e ^ {\frac{izt\eta}{\sqrt{1 + z^2}}}
+   \cdot \rho(z) dz
+  = \] 
+
+  \[= \int e^{\frac{-1}{2}\frac{t^2}{1 + z^2}}
+  \cdot e^{\frac{-1}{2}\frac{t^2z^2t}{1 + z^2}} 
+  \rho(z) dz = e^{\frac{-t^2}{2}} \cdot 1 
+   = e^{\frac{-t^2}{2}}
+   \]
+
+
+Ответ: $e^{\frac{-t^2}{2}}$
+
+\section*{Задача 9}
+
+
+
+Мы знаем, что  $\xi_i$ независымые и так же
+что при умножение на константу мы увеличиваем мат ожидание в константу раз
+а дисперсия увеличивается в квадрат константы раз
+то есть например 
+\[2\xi_1, \; N(0, 4)\]
+\[2\xi_1 -3 \xi_2 + \xi_3 - \xi_4 , \; N(2, 21)\]
+\[P(|2\xi_1 -3 \xi_2 + \xi_3 - \xi_4 | < 13) = \text{Ф}\left(\frac{13-2}{\sqrt{21}}\right) - \text{Ф}\left(\frac{-13-2}{\sqrt{21}}\right)
+\]
+Ответ:  \textbf{0.9918}
+
+\end{document}

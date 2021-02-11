@@ -1,0 +1,127 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по теории вероятности №4}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+
+\section*{Задача № 10}
+
+\paragraph{Обозначим:}
+\begin{itemize}
+    \item $A_i$ - событие, что болен i-ой болезнью.
+    \item $p_i$ - вероятность, что болен i-ой болезнью.
+    \item $p_1 = \frac{1}{2}, \quad p_2 = \frac{1}{6}, \quad p_3 = \frac{1}{3}$
+    \item $B$ - событие, что тест дал 
+    4 положительных и 1 отрицательный результат.
+\end{itemize}
+
+
+Посчитаем по формуе полной вероятности:
+\begin{align*}
+P(B_{}) = C^4_5 \cdot (&P(B_{}|A_1) \cdot P(A_1)  \; + \\
++ \; &P(B_{}|A_2) \times P(A_2) \;+  P(B_{}|A_3)) \cdot P(A_3)) = \\
+&5 \cdot (0,1^4 \cdot 0,9 \cdot 0,5  + 0,2^4 \cdot 0,8 \cdot (1/6) + 0,9^4 \cdot 0,1 \cdot (1/3) \approx 0,1105
+ \end{align*}
+
+\subsubsection*{Ответ} 
+
+По формуле Байеса:
+
+\begin{equation*}
+    P(A_1|B_{})= \frac{P(B_{}|A_1)\cdot P(A_1)}{P(B_{})} = \frac{0,1^4 \cdot 0,9 \cdot 0,5 \cdot 5}{0,1105} \approx 0,002
+\end{equation*}
+
+\begin{equation*}
+    P(A_2|B_{})= \frac{P(B_{}|A_2)\cdot P(A_2)}{P(B_{})} = \frac{0,2^4 \cdot 0,8 \cdot 5 \cdot (1/6)}{0,1105} \approx 0,0009
+\end{equation*}
+
+\begin{equation*}
+    P(A_3|B)= \frac{P(B|A_3)\cdot P(A_3)}{P(B)} = \frac{09^4 \cdot 0,1 \cdot (1/3) \cdot 5}{0,1105} \approx 0,9886 
+\end{equation*}
+
+\section*{Задача №11}
+\paragraph{Обозначим:}
+\begin{itemize}
+    \item $A^2_N, $ - событие, что при N испытаниях будет ровно 2 успеха.
+    \item $A^{2k}_{N}$ - событие, что при N испытаниях будет четное число успехов.
+    \item $p = \frac{1}{2}$ - вероятность успеха.
+    \item $q = \frac{1}{2}$ - вероятность провала.
+\end{itemize}
+
+\begin{equation*}
+    P(A^2_N) = C^2_N \cdot \left( \frac{1}{2} \right)^N
+\end{equation*}
+
+\begin{align*}
+    P(A^{2k}_N) = &\frac{C^0_N + C^2_N +C^4_N +C^6_N + \ldots}{2^N} = \\
+    = &\frac{C^0_{N-1} + C^1_{N-1} +C^2_{N - 1} +C^3_{N - 1} + \ldots}{2^N} = \frac{2^{N - 1}}{2^N} 
+    =\frac{1}{2}
+\end{align*}
+
+\subsection*{Ответ:}
+\begin{equation*}
+    P(A^2_N | A^{2k}_N) = \frac{P(A^2_N \cap A^{2k}_N)}{P(A^{2k}_N)} = 
+    C^2_N \cdot \left( \frac{1}{2} \right)^{N - 1}
+\end{equation*}
+
+\section*{Задача №12}
+\paragraph{Обозначим:}
+\begin{itemize}
+    \item $A^m_n, $ - событие, что m успехов произойдут раньше, чем n неудач.
+    \item $p$ - вероятность успеха.
+    \item $(1 - p)$ - вероятность неудачи
+    \item кодировка, 0 - неудача, 1 - успех.
+\end{itemize}
+Если кодировать наши слачаи словами, то получится, что такое
+\begin{align*}
+    &\underbrace{.............}_{m + n - 2}1 \\
+    &\underbrace{...........}_{m + n - 3}1 \\
+    &\underbrace{.........}_{m + n - 4}1 \\
+    &\, .........\\
+    &\underbrace{11111}_{m}\\
+\end{align*}
+первые (m - 1 + n - 1) элементы
+это m - 1 единички и n - 1 нолики,
+то есть мы просто посчитаем число расстановок $C^{m-1}_{m + n - 2}$, 
+таким образом посчитаем другие слова тоже $C^{m-1}_{m + n - 3}$, 
+$C^{m-1}_{m + n - 4}$, \ldots, 1 \\
+или если посмотреть с другой стороны по увелечению, то получим \\
+$C^{m - 1}_{m - 1}, \; C^{m - 1}_{m - 2},\; \ldots,\; C^{m-1}_{m + n - 2}$
+
+\subsection*{ответ:}
+\begin{equation*}
+    P(A^m_n) = \sum^{n -1}_{i = 0} C^{m - 1}_{m - 1 + i} \cdot (1 - p)^i \cdot  p^m
+\end{equation*}
+
+\end{document}

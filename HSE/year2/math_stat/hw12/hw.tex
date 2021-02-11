@@ -1,0 +1,117 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формулx
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклидxwxx
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage{ dsfont }
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand{\Expect}{\mathsf{E}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по мат стату №12}
+
+
+\begin{document} % конец преамбулы, начало документа
+\date{30 мая}
+\maketitle
+
+\section*{Листок №8 Задание №10}
+Дана выборка размера 1 из кспоненциального распределения с параметром 
+$\lambda$. Для проверки гипотезы $H_0 : \lambda = 1$ против $H_1 : \lambda =3$
+используют критерий, если $X_1 > 3$, то $H_0$ оклонить, а если $X_1 \leq 3$, то принять. 
+Найдите уровень значимости и мощность критерия.
+\subsection*{Уровень значимости (а)}
+
+Просто посчитаем по определению нужную вероятность 
+с помошью известной плотности экспоненциального распределения
+$\rho(x) = \lambda e^{-\lambda x}$
+
+\[
+P(X \in K) (когда \; \lambda = 1) = \int_{-\infty}^{\infty} 
+I_{X > 3}(x) \cdot 1 * e^{-1 * x} dx = \int_{3}^{\infty} e^{-x}dx = \frac{1}{e^{3}} \Rightarrow
+\]
+
+\[
+    Уровень \; значимости \; \alpha \approx 0.0497    
+\]
+
+\subsection*{Мощность критерия (б)}
+Аналогичном образом, но уже подругой формуле посчитаем мощность критерия
+
+\[
+P(X \in K) ( \; \lambda = 3) = \int_{-\infty}^{\infty} 
+I_{X > 3}(x) \cdot 3 e^{-3 x} dx = \int_{3}^{\infty} 3e^{-3x}dx = \frac{1}{e^{9}}
+= 1 - \beta \Rightarrow 
+\]
+
+\[
+    Мощность \; критерия \; \beta \; = 1 -  \frac{1}{e^{9}} \approx 0.9998766
+\]
+
+
+\section*{Листок №8 Задание №8}
+
+Критерий Неймана-Пирсона Гласит, что критическо множество $K$ 
+
+\[
+    K = \{ X : \frac{f}{g} \geq t\}   
+\]
+Так как мы знаем что $f$ - это плотность равная $e^{-2|x|}$ 
+$g$ - это плотность нормального распределения равная $\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}}$
+\\§
+По сути нам нужно из неравенства выразить x и позже по определению вероятности 
+мы сможем посчитать $\alpha$ уровнь значимости нашего критерия.
+
+\[
+    \frac{e^{-2|x|}}{\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}}} \geq t 
+    \Rightarrow e^{-2|x| + \frac{x^2}{2}} \geq \frac{t}{\sqrt{2\pi}}
+    \] 
+\[ 
+    \Rightarrow -2|x| + \frac{x^2}{2} \geq \ln(\frac{t}{\sqrt{2\pi}})
+    \Rightarrow x^2 - 4|x| - 2\ln(\frac{t}{\sqrt{2\pi}}) \geq 0
+\]
+ДИСКРИМИНАНТ СИЛА! \\
+Сделаем маленькую замену $|x| = a \Rightarrow x^2 = a^2 $
+\\ Опа по формулке, мы получим:
+\[
+    a_{1,2}  = \frac{4 \; \pm \; \sqrt{16 + 8\ln(\frac{t}{\sqrt{2\pi}}})}{2}     
+\]
+\[
+    a_1 =  2 \; - \; \sqrt{4 + 2\ln(\frac{t}{\sqrt{2\pi}}}) \; \; \;
+    a_2 =  2 \; + \; \sqrt{4 + 2\ln(\frac{t}{\sqrt{2\pi}}})
+    \]
+Так, следующий этап грамотно найти значение параметра $t$, 
+чтобы получить нужный уровень значимости $\alpha$
+Мы знаем, что 
+\[
+\alpha = P_{\theta_0}(X \in K) = \int_{K}\rho_0(x)dx =  \int_{K} \frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} 
+\]
+Грамотно раскрыв модуль на иксе, мы сможем найти гранциы для интеграла
+\[
+    \alpha =  \int_{a_2}^{+\infty}\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} 
+    + \int_{-\infty}^{a_1}\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} + \int_{a_1}^{a_2}\frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}}
+    \]
+
+
+\end{document}

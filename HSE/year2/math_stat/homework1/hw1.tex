@@ -1,0 +1,97 @@
+\documentclass[a4paper, 12pt]{article} % добавить leqno в [] для нумерации слева
+
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\newcommand{\Expect}{\mathsf{E}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Заголовок
+\author{Агаев Фархат}
+\title{Домашнее задание по мат стату №1}
+\date{\today}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+\section*{Задача №9}
+Пусть $\xi = \xi_1 + \xi_2 + \xi_3 + \xi_4$ - время приема четырех людей (оно занимает от 4 до 16 минут)
+Неравенство Чебышева воспользуемся им 
+\[
+    P(\xi > 12) < 
+ \frac{\Expect \xi}{12} 
+\]
+Посчитаем по формуле $\Expect \xi = \frac{a + b}{2} = 10$
+Получаем такую оценку 
+\[
+    P(\xi > 12) < 
+ \frac{5}{6} 
+\]
+\section*{Задача №10} {
+\[
+m_n = min\{\xi_1, \ldots, \xi_n\}    
+\]    
+\[
+    P(m_n > t) = (1-t)^n
+\] 
+\[
+    F = 0, t \leq 0 
+\]
+\[
+    F = 1, t \geq 1
+\]
+\[
+  F_{m_n}(t) = P(m_n \leq t) = 1 - (1-t)^n 
+\]
+
+РАсммотрим последовательность случайных величин $m_1, m_2, \ldots$
+Очевидно, что последовательность монотонно убывает ($m_1 \geq m_2$ \ldots ) и ограничена. Так как
+$ A_1 = min\{\xi_1\} \in A_2 = \min\{\xi_1, \xi_2\}$ \ldots  Очев огр, так как $0 \leq m_n \leq 1$
+$\Rightarrow \exists \lim\limits_{n\to \infty}\xi_n $
+воспользуемся стандартным приемом сверху мы обозначили события $A_i$
+\[
+    P(A = \cap_{n = 1}A_n) \rightarrow 0 = 1 - (1 - t)^n = 1 \text{ при } n \rightarrow \infty
+\]
+Ответ: Почти наверное стремится к нулю (доказывали лемму на семе)
+\section*{Задача №11}
+    возьмем случ вел. 
+\[
+    \mu = e^{ln(\eta_n)}
+\]
+\[
+    \mu = e^{ln(\sqrt[n]{\xi_1 \cdots \xi_n})} = e^{\frac{ln(\xi_1) + ln(\xi_2) + \ldots + ln(\xi_n)}{n}}
+    \]
+    По закону больших чисел в слабой форме ($\Expect|ln (\xi_k)|^4$ конечное)
+    \[
+    \Expect \xi = -1    
+    \]
+    Так как 
+    \[
+      \int_{0}^{1} ln(x) dx  = xln(x) - x |^1_0
+    \]
+    $\Rightarrow $
+    Ответ: \[
+        \frac{1}{e}
+        \]
+\end{document}
