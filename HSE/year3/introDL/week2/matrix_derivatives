@@ -1,0 +1,16 @@
+Question 1
+Choose the correct statements about MLP implementation:
+
+Answer:
+
+A forward pass of a dense layer can be done with matrix product
+You can write both passes of a dense layer with NumPy and make it quick even in Python
+
+
+Question 2
+How many dimensions will a derivative of a 3-d tensor by a 4-d tensor have?
+Answer: 7
+
+Question 3
+Let's play around with matrix derivatives! 
+2x^T

@@ -1,0 +1,21 @@
+1.
+Question 1
+Choose the correct statements about MLP
+
+Answer: 
+A hidden layer of MLP automatically learns new helpful features for the task
+We can train MLP with SGD
+
+Question 2
+Apply a chain rule to calculate where a(x,y)=sin(xy)⋅e 
+Answer: ​y*cos(x*y)*E^x  + sin(x*y) * E^x
+
+Question 3
+Choose the correct statements about backpropagation
+
+Answer: 
+It is an efficient way to apply a chain rule
+It is the way to train modern neural networks
+
+What is the time complexity of backpropagation algorithm w.r.t. number of edges N in the computational graph?
+Answer: O(N)

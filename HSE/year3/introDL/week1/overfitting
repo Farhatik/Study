@@ -1,0 +1,32 @@
+1.
+Question 1
+Select correct statements about overfitting:
+
+Answer:
+Large model weights can indicate that model is overfitted
+
+Overfitting is a situation where a model gives lower quality for new data compared to quality on a training sample
+
+2.
+Question 2
+What disadvantages do model validation on holdout sample have?
+
+Answer:
+It can give biased quality estimates for small samples
+It is sensitive to the particular split of the sample into training and test parts
+
+3.
+Question 3
+Suppose you are using k-fold cross-validation to assess model quality. How many times should you train the model during this procedure?
+
+Answer: k
+
+4.
+Question 4
+Select correct statements about regularization:
+
+Answer:
+
+Regularization restricts model complexity (namely the scale of the coefficients) to reduce overfitting
+
+Weight penalty drives model parameters closer to zero and prevents the model from being too sensitive to small changes in features

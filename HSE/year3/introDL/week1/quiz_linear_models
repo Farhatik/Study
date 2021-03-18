@@ -1,0 +1,6 @@
+1. Consider a vector (1,−2,0.5). Apply a softmax transform to it and enter the first component (accurate to 2 decimal places).
+Answer: 0.6
+2. Suppose you are solving a 5-class classification problem with 10 features. How many parameters a linear model would have? Don't forget bias terms!
+Answer: 55
+3. There is an analytical solution for linear regression parameters and MSE loss, but we usually prefer gradient descent optimization over it. What are the reasons?
+Answer: 
